@@ -1,61 +1,83 @@
-var wrapper = document.getElementsByClassName("slidewrapper");
-//for (i = 0; i < wrapper.length; i++) {
+window.onload = function(){ appendSlider('slidewrapper');};
 
-    var images = wrapper[0].getElementsByTagName("img");
-    var pointer = 0;
 
-    for (j = 0; j < images.length; j++) {
-        images[j].style.display = "none";
+
+function appendSlider (classSlider) {
+    var wrapper = document.getElementsByClassName(classSlider);
+    for (var i = 0; i < wrapper.length; i++) {
+        createSlider(wrapper[i], i);
     }
+}
+
+function hidePictures (images){ // прячем картинки для слайдера
+    for (var i = 0; i < images.length; i++){
+        images[i].style.display = 'none';
+    }
+}
+
+function createButton (name, innerText, parent, i){ // создаем кнопки слайдера
+
+    if (name === 'prevpict') {
+        var leftButton = document.createElement('div'); //создаем элемент
+        leftButton.id = name+i; //присваиваем ID
+        leftButton.className = name; //присваиваем класс
+        leftButton.innerHTML = innerText;
+        leftButton.addEventListener("click", function() { prevImage(leftButton.id);});
+        parent.appendChild(leftButton);
+        return 'leftButton';
+
+    } else if(name === 'nextpict') {
+        var rightButton = document.createElement('div'); //создаем элемент
+        rightButton.id = name+i; //присваеваем ID
+        rightButton.className = name; //присваеваем класс
+        rightButton.innerHTML = innerText;
+        rightButton.addEventListener("click", function() { nextImage(rightButton.id);});
+        parent.appendChild(rightButton);
+        return 'rightButton';
+    }
+}
+
+function createImage (images, parent, i){ // создаем изображение в слайдере
+    var image = document.createElement('img');
+    image.id = 'image'+i;
+    image.className = 'image';
+    image.currentImage = 0;
+    image.src = images[image.currentImage].src;
+    parent.appendChild(image);
+
+
+}
+
+function nextImage(buttonId){
+    var numb = buttonId.substr(-1,1);
+    var pict = document.getElementById('image'+numb);
+    pict.currentImage++;
+    if (pict.currentImage > images.length - 1) {
+        pict.currentImage = 0;
+    }
+    pict.src = images[pict.currentImage].src;
+}
+function prevImage(buttonId){
+    var numb = buttonId.substr(-1,1);
+    var pict = document.getElementById('image'+numb);
+    pict.currentImage--;
+    if (pict.currentImage < 0){
+        pict.currentImage = images.length - 1;
+    }
+    pict.src = images[pict.currentImage].src;
+}
+
+
+
+function createSlider (wrapper, i){ // создаем слайдер
+    images = wrapper.getElementsByTagName("img");
+    hidePictures(images);
+
     var newDiv = document.createElement('div');
-    newDiv.id = 'slider';
-    document.body.appendChild(newDiv);
-    var leftButton = document.createElement('div');
-    leftButton.id = 'prevImage';
-    leftButton.innerHTML = 'Prev';
-
-    var rightButton = document.createElement('div');
-    rightButton.id = 'nextImage';
-    rightButton.innerHTML = 'Next';
-
-    var blockImage = document.createElement('div');
-    blockImage.id = 'blockImage';
-    newDiv.appendChild(leftButton);
-    newDiv.appendChild(blockImage);
-    newDiv.appendChild(rightButton);
-
-    slider(images);
-
-
-    var leftBut = document.getElementById('prevImage');
-    var rightBut = document.getElementById('nextImage');
-    leftBut.addEventListener("click", prevImage);
-    rightBut.addEventListener("click", nextImage);
-
-    function slider(imgs) {
-        var picture = document.createElement('img');
-        var blockImg = document.getElementById('blockImage');
-        picture.id = 'mainpict';
-        picture.src = imgs[0].src;
-        blockImg.appendChild(picture);
-    }
-
-
-    function nextImage() {
-        var img = document.getElementById('mainpict');
-        pointer++;
-        if (pointer > images.length - 1) {
-            pointer = 0;
-        }
-        img.src = images[pointer].src;
-    }
-
-    function prevImage() {
-        var img = document.getElementById('mainpict');
-        pointer--;
-        if (pointer < 0) {
-            pointer = images.length - 1;
-        }
-        img.src = images[pointer].src;
-    }
-//}
+    newDiv.id = 'slider'+i;
+    newDiv.className = 'slider';
+    wrapper.appendChild(newDiv);
+    createButton('prevpict', 'prev', newDiv, i);
+    createImage(images, newDiv, i);
+    createButton('nextpict', 'next', newDiv, i);
+}
