@@ -56,7 +56,6 @@ function nextImage(buttonId){
         pict.currentImage = 0;
     }
     pict.src = images[pict.currentImage].src;
-    console.log(pict.currentImage);
 }
 function prevImage(buttonId){
     var numb = buttonId.substr(-1,1);
@@ -66,7 +65,6 @@ function prevImage(buttonId){
         pict.currentImage = images.length - 2;
     }
     pict.src = images[pict.currentImage].src;
-    console.log(pict.currentImage);
 }
 
 
