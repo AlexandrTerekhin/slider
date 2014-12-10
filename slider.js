@@ -1,7 +1,5 @@
 window.onload = function(){ appendSlider('slidewrapper');};
 
-
-
 function appendSlider (classSlider) {
     var wrapper = document.getElementsByClassName(classSlider);
     for (var i = 0; i < wrapper.length; i++) {
@@ -45,7 +43,6 @@ function createImage (images, parent, i){ // создаем изображени
     image.src = images[image.currentImage].src;
     parent.appendChild(image);
 
-
 }
 
 function nextImage(buttonId){
@@ -66,8 +63,6 @@ function prevImage(buttonId){
     }
     pict.src = images[pict.currentImage].src;
 }
-
-
 
 function createSlider (wrapper, i){ // создаем слайдер
     images = wrapper.getElementsByTagName("img");
