@@ -3,37 +3,47 @@ img {
     height: 600px;
 }
 
-#slider {
+.slider {
+    display: block;
     align-self: center;
-    padding: 0px;
-    margin: 0px;
+    margin: 20px;
     height: 600px;
     width: 1000px;
     background: #ffffff;
 }
-#prevImage {
+.prevpict {
+    float: left;
+    display: inline-block;
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
-    float: left;
     height: 600px;
     width: 100px;
     background: #7fffd4;
     font-size: x-large;
     text-align: center;
 }
-#nextImage {
+.nextpict {
+    float: right;
+    display: inline-block;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
-    float: right;
     height: 600px;
     width: 100px;
     background: #7fffd4;
     font-size: x-large;
     text-align: center;
 }
+.image {
+    display: inline-block;
+    height: 600px;
+    width: 800px;
+}
+
 #mainpict {
+    display: inline-block;
     float: left;
 }
 .hidden {
     visibility: hidden;
+
 }

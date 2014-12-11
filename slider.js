@@ -49,7 +49,7 @@ function nextImage(buttonId){
     var numb = buttonId.substr(-1,1);
     var pict = document.getElementById('image'+numb);
     pict.currentImage++;
-    if (pict.currentImage >= images.length - 1) {
+    if (pict.currentImage > images.length - 2) {
         pict.currentImage = 0;
     }
     pict.src = images[pict.currentImage].src;
@@ -58,8 +58,8 @@ function prevImage(buttonId){
     var numb = buttonId.substr(-1,1);
     var pict = document.getElementById('image'+numb);
     pict.currentImage--;
-    if (pict.currentImage <= 0){
-        pict.currentImage = images.length - 1;
+    if (pict.currentImage < 0){
+        pict.currentImage = images.length - 2;
     }
     pict.src = images[pict.currentImage].src;
 }
